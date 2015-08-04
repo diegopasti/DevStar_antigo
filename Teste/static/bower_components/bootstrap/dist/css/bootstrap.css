@@ -6582,3 +6582,14 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+.search-datatable {
+	background-color: #000;
+}
+
+div.rightcolumn {
+float:right;
+width:10%;
+height:auto;
+}
+
