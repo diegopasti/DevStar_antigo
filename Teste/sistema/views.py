@@ -76,13 +76,13 @@ class analisar_projetos_cadastrados(threading.Thread):
             projetos_desatualizados[contador].save()
             contador = contador+1
         
-        print "Forcar Desatualizacao para permitir novas Analises: "
-        projetos_atualizados = Projeto.objects.all()
-        contador = 0
-        for projeto in projetos_atualizados:
-            projetos_atualizados[contador].Atualizado = False
-            projetos_atualizados[contador].save()
-            contador = contador + 1
+        #print "Forcar Desatualizacao para permitir novas Analises: "
+        #projetos_atualizados = Projeto.objects.all()
+        #contador = 0
+        #for projeto in projetos_atualizados:
+        #    projetos_atualizados[contador].Atualizado = False
+        #    projetos_atualizados[contador].save()
+        #    contador = contador + 1
 
 def projeto(request,projeto_id):
     projeto = Projeto.objects.get(id=projeto_id)
@@ -226,7 +226,7 @@ def cadastro_projetos(request):
         
         projeto.NumeroLinhasCodigo = estado.NumeroLinhasCodigo
         projeto.NumeroMetodos = estado.NumeroMetodos
-        projeto.ComplexidadeTotal = estado.ComplexidadeTotal
+        projeto.ComplexidadeTotal = int(estado.ComplexidadeTotal)
         
         projeto.UltimaAtualizacao = estado.Data
         projeto.Complexidade = estado.ComplexidadePorMetodo

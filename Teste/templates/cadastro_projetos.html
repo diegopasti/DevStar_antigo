@@ -90,10 +90,11 @@ vertical-align: middle;
 								<th>Mét.</th>	
 								
 								<th>%</th>
-								<th>Gravíssima</th>
-								<th>Graves</th>
-								<th>Moderadas</th>
-								<th>Normais</th>
+								<th><i class="fa fa-ban a-1x"></i></th>
+								<th><i class="fa fa-exclamation-triangle a-1x"></i></th>
+								<th><i class="fa fa-exclamation a-1x"></i></th>
+								<th><i class="fa fa-info-circle a-1x"></i>
+</th>
 								
 								
 							</tr>
@@ -161,13 +162,13 @@ $(document).ready(function() {
 		"pagingType": "simple",
 		"lengthMenu": [[10, 100, -1], [10, 100, "All"]],
 		"dom": '<"top">rt"<"rightcolumn"p><"clear">',
-		"bAutoWidth": true,
 		"ordering": true,
+		"bAutoWidth": false,
 		"aoColumns": [
 	                    { "sWidth": "null" }, // 1st column width 
 	                    { "sWidth": "null" }, // 2nd column width 
 	                    { "sWidth": "null" }, // 3rd column width
-	                    { "sWidth": "null" }, // 4th column width 
+	                    { "sWidth": "10px" }, // 4th column width 
 	                    { "sWidth": "null" }, // 5th column width 
 	                    { "sWidth": "null" }, // 6th column width
 	                    { "sWidth": "null" }, // 7th column width

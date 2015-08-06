@@ -151,13 +151,13 @@ vertical-align: middle;
 	
 							{% for projeto in lista_projetos %}
 							<tr class="even gradeC alinhado_meio" >
-								<td><a href="/projeto/{{ projeto.id }}" style="display: block;">{{ projeto.Nome }}</a></td>
-								<td><a href="/projeto/{{ projeto.id }}" style="display: block;">{{ projeto.Linguagem }}</a></td>
+								<td align="left"><a href="/projeto/{{ projeto.id }}" style="display: block;">{{ projeto.Nome }}</a></td>
+								<td align="left"><a href="/projeto/{{ projeto.id }}" style="display: block;">{{ projeto.Linguagem }}</a></td>
 								<td><a href="/projeto/{{ projeto.id }}" style="display: block;">{{ projeto.UltimaAtualizacao|date:'d/m/Y' }}</a></td>
 								<td><a href="/projeto/{{ projeto.id }}" style="display: block;">{{ projeto.Complexidade }}</a></td>
 								<td><a href="/projeto/{{ projeto.id }}" style="display: block;">{{ projeto.Duplicacao }}</a></td>
 								<td><a href="/projeto/{{ projeto.id }}" style="display: block;">{{ projeto.DividaTecnica }}</a></td>
-								<td><a href="/projeto/{{ projeto.id }}" style="display: block;">{{ projeto.Nota }}</a></td>
+								<td><a href="/projeto/{{ projeto.id }}" style="display: block;"><b>{{ projeto.Nota }}</b></a></td>
 							</tr>
 							{% endfor %}
 						
