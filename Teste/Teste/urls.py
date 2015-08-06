@@ -19,8 +19,13 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', "sistema.views.index"),
-    url(r'^projetos/$',"sistema.views.projetos"),
+    url(r'^cadastro_fontes/$',"sistema.views.cadastro_fontes"),
+    url(r'^projeto/(?P<projeto_id>\d+)/$',"sistema.views.projeto"),
+    url(r'^meus_projetos/$',"sistema.views.meus_projetos"),
+    url(r'^cadastro_projetos/$',"sistema.views.cadastro_projetos"),
+    url(r'^analisar_projetos/$',"sistema.views.analisar_projetos"),
     url(r'^cadastrar-projetos-nemo/$',"sistema.views.cadastrar_projetos_nemo"),
+    url(r'^atualizar_barra_progresso_analise/$',"sistema.views.atualizar_barra_progresso_analise"),
     url(r'^atualizar_barra_progresso/(?P<num_links>\d+)/$',"sistema.views.atualizar_barra_progresso"),
     #url(r'^atualizar_barra_progresso/$',"sistema.views.atualizar_barra_progresso"),
 ]

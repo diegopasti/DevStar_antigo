@@ -1,0 +1,366 @@
+{% extends 'base.html' %} 
+
+{% block Titulo %}
+<meta charset="utf-8">
+
+<title>DevStar - Cadastro de Projetos</title>
+{% endblock %} 
+
+{% block ArquivosEstaticos %}
+<!-- DataTables CSS -->
+{% load staticfiles %}
+<link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+<!-- DataTables Responsive CSS -->
+<link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+<style type="text/css">
+
+div.rightcolumn {
+display: inline;
+float:right;
+margin-right: 0px;
+margin-top: -28px;
+height:auto;
+width: 134px;
+}
+
+.linha_cabecalho{
+
+}
+
+.linha_cabecalho th{
+font-size: 12px;
+line-height: 0px;
+vertical-align: middle;
+text-align: center;
+}
+
+.alinhado_meio{
+text-align: center;
+vertical-align: middle;
+}
+
+</style>
+
+{% endblock %} 
+
+{% block Principal %}
+ 
+<!-- 
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">Cadastro de Projetos</h1>
+	</div>
+</div>
+
+ -->
+
+<!-- /.row -->
+
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">{{ projeto.Nome }}</h1>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+
+
+
+
+
+<div class="row">
+	
+<br>
+	<div class="panel panel-default" style="margin-top: -5px;">
+		<div class="panel-heading">
+
+			<div class="row">
+				<div class="col-lg-6" style="line-height: 35px; font-size: 16px;">
+					<b>Visão Geral</b>
+				</div>
+			</div>
+		</div>
+		<!-- /.panel-heading -->
+		<div class="panel-body" style="margin-bottom: -16px;">
+		<div class="row">
+		
+	<div class="col-lg-3 col-md-6">
+		<div class="panel panel-{{ cor_painel_complexidade }}">
+		
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="{{ icone_painel_complexidade }}"></i>						
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">{{ estado_atual.ComplexidadePorMetodo }}</div>
+						<div><b>Complexidade</b></div>
+					</div>
+				</div>
+			</div>
+			<a href="#">
+				<div class="panel-footer">
+					<span class="pull-left"><b>Média Global: {{ complexidade_media }}</b></span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="col-lg-3 col-md-6">
+		<div class="panel panel-{{ cor_painel_duplicacao }}">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="{{ icone_painel_duplicacao }}"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">{{ estado_atual.TaxaDuplicacao }}%</div>
+						<div><b>Duplicacação</b></div>
+					</div>
+				</div>
+			</div>
+			<a href="#">
+				<div class="panel-footer">
+					<span class="pull-left"><b>Média Global: {{ duplicacao_media }}%</b></span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="col-lg-3 col-md-6">
+		<div class="panel panel-{{ cor_painel_divida }}">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="{{ icone_painel_divida }}"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">{{ estado_atual.TaxaDividaTecnica }}%</div>
+						<div><b>Dívida Técnica</b></div>
+					</div>
+				</div>
+			</div>
+			<a href="#">
+				<div class="panel-footer">
+					<span class="pull-left"><b>Média Global: {{ divida_media }}%</b></span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="col-lg-3 col-md-6">
+		<div class="panel panel-{{ cor_painel_nota }}">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-3">
+						<i class="{{ icone_painel_nota }}"></i>
+					</div>
+					<div class="col-xs-9 text-right">
+						<div class="huge">{{ estado_atual.Nota }}</div>
+						<div><b>Nota</b></div>
+					</div>
+				</div>
+			</div>
+			<a href="#">
+				<div class="panel-footer">
+					<span class="pull-left">Detalhes</span> <span
+						class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
+<!-- /.row -->
+		</div>
+		<!-- /.panel-body -->
+	</div>
+	<!-- /.panel -->
+</div>
+<!-- /.row -->
+
+
+
+<div class="row">
+	<div class="col-lg-12">
+				
+			<div class="col-lg-6">
+				
+				{% for error in form.Link.errors%}
+		        <div class="alert alert danger fade in" style="
+		        	background-color:#555;
+		        	border:2px solid #FFF;
+					z-index:200;
+					
+		        	position: fixed;
+					width:400px;
+				  	height:70px;					
+				
+					top: 550px;
+					left: 40%;
+					border-radius: 60px;
+					
+					text-align: center;
+					line-height: 35px;
+					
+					">
+		        
+			        <a  href="#" style=
+					    "color: #FFF;
+					    line-height: 0.5;
+					    font-size: 20px; 
+					    ">
+						    
+				    {{ error }}</a>
+		            
+		        </div><!--- .alert.alert-error -->
+		    	{% endfor %}
+		    	
+				<!--  {{ form.Link.errors }}  -->
+			</div>
+			<!-- /.col-lg-6 -->
+		</div>
+		<!-- /.row -->
+
+		<br>
+		<div class="panel panel-default" style="margin-top: -5px;">
+		<div class="panel-heading">
+		
+			<div class="row">
+				<div class="col-lg-6" style="line-height: 35px; font-size: 16px;">
+					<b>Histórico de Análises</b>
+				</div>
+				
+			
+			<!-- /.col-lg-6 -->	
+				
+			</div>
+		
+		</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body" style="margin-bottom: -26px;">
+			
+				<div class="dataTable_wrapper">
+					<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+						
+						<thead>
+							<tr class="linha_cabecalho">
+				                <th rowspan="2" style="vertical-align: middle;" >Atualização</th>
+				                <th colspan="2">Tamanho</th>
+				                <th colspan="2">Complexidade</th>
+				                <th colspan="1">Duplicação</th>
+				                <th colspan="6">Violações (Dívida Técnica)</th>
+				                <th rowspan="2" style="vertical-align: middle;" >Nota</th>
+				            </tr>
+							
+							<tr class="linha_cabecalho">
+								<th>Linhas</th>
+								<th>Métodos</th>																									
+								<th>Total</th>
+								<th>Por Método</th>	
+								<th>%</th>
+								<th>%</th>
+								<th>Gravíssima</th>
+								<th>Graves</th>
+								<th>Moderadas</th>
+								<th>Normais</th>
+								<th>Simples</th>
+							</tr>
+						</thead>
+						<tbody>	
+						
+						{% for estado in lista_estados %}
+										
+							<tr class="alinhado_meio">
+								<td>{{ estado.Data|date:"d-m-Y" }}</td>
+								<td>{{ estado.NumeroLinhasCodigo }}</td>
+								<td>{{ estado.NumeroMetodos }}</td>
+								<td>{{ estado.ComplexidadeTotal }}</td>
+								<td>{{ estado.ComplexidadePorMetodo }}</td>
+								<td>{{ estado.TaxaDuplicacao }}</td>
+								<td>{{ estado.TaxaDividaTecnica }}</td>
+								<td>{{ estado.NumeroProblemasMuitoCriticos }}</td>
+								<td>{{ estado.NumeroProblemasCriticos }}</td>
+								<td>{{ estado.NumeroProblemasModerados }}</td>
+								<td>{{ estado.NumeroProblemasNormais }}</td>
+								<td>{{ estado.NumeroProblemasSimples }}</td>
+								<td><b>{{ estado.Nota }}</b></td>
+							</tr>
+							
+						{% empty %}
+						
+						{% endfor %}
+							
+						</tbody>
+					</table>
+				</div>
+				
+				<!-- /.table-responsive -->
+				 
+				 <div class="col-lg-6">
+					<input type="text" id="search" class="form-control" style="display: inline; position: relative; margin-left: -14px; margin-top: -6px;"  placeholder="Consultar..">
+				</div>
+				
+				
+				
+			</div>
+			<!-- /.panel-body -->
+			
+		</div>
+		<!-- /.panel -->
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+{% endblock %}
+
+{% block ArquivosScripts %}
+{% load staticfiles %}
+<!-- DataTables JavaScript -->
+<script	src="{% static 'bower_components/datatables/media/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js' %}"></script>
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+ 
+<script>
+$(document).ready(function() {
+	
+	$('#dataTables-example').DataTable({
+		responsive: true,
+		"pagingType": "simple",
+		"lengthMenu": [[10, 100, -1], [10, 100, "All"]],
+		"dom": '<"top">rt"<"rightcolumn"p><"clear">',
+		"bAutoWidth": false,
+		"ordering": true,
+		"aoColumns": [
+	                    { "sWidth": "96px" }, // 1st column width 
+	                    { "sWidth": "80px" }, // 2nd column width 
+	                    { "sWidth": "90px" }, // 3rd column width
+	                    { "sWidth": "70px" }, // 4th column width 
+	                    { "sWidth": "100px" }, // 5th column width 
+	                    { "sWidth": "null" }, // 6th column width
+	                    { "sWidth": "null" }, // 7th column width
+	                    
+	                    { "sWidth": "null" }, // 7th column width
+	                    { "sWidth": "null" }, // 7th column width
+	                    { "sWidth": "null" }, // 7th column width
+	                    { "sWidth": "null" }, // 7th column width
+	                    { "sWidth": "null" }, // 8th column width
+	                    { "sWidth": "null" } // 8th column width
+	                    ]
+	});
+	 
+});
+
+$('#search').on( 'keyup', function () {
+	var table = $('#dataTables-example').DataTable();
+    table.search( this.value ).draw();
+} );
+
+$(".alert").fadeOut(3000 );
+
+</script>
+{% endblock %}
+
